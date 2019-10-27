@@ -1,4 +1,6 @@
-Le but de ce repo est de faire des poc avec angular
+Voici une appli basique pour tester les capacité d'angular
+Developpé via angular-cli
 
-voici ce qu'on peut retrouver dans les différentes branch :
- - elements : faire des web-components natif avec angular
+pour lancer l'appli :
+ - npm install
+ - npm run start (localhost:4200)
