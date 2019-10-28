@@ -1,19 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: 've-simple-form',
+  selector: "ve-simple-form",
   template: `
-    <p>
-      simple-form works!
-    </p>
+    <div>
+        <input #myInput type="text" [(ngModel)]="searchedItem" (keyup)="update.emit($event.target.value)">
+        <button (click)="onClick($event, myInput.value)">Clear</button>
+    </div>
   `,
   styles: []
 })
-export class SimpleFormComponent implements OnInit {
+export class SimpleFormComponent {
+  @Input() searchedItem: string;
+  @Output() update: EventEmitter<string> = new EventEmitter();
 
   constructor() { }
 
-  ngOnInit() {
+  onClick(event: MouseEvent, value: string) {
+      console.log(event);
+      console.log(`clicked!, the value of the input is ${value}`);
+      this.searchedItem = "";
+      this.update.emit(this.searchedItem);
   }
 
 }
