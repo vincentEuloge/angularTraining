@@ -8,10 +8,14 @@ export class MailService {
     searchedMessage = "";
 
     messages = [
-        "Vous venez de commencer le tuto angular",
-        "Avec angular-cli la productivité est doublé",
-        "Mais certain n'aime pas la magie"
+        {id: 0, text: "Vous venez de commencer le tuto angular"},
+        {id: 1, text: "Avec angular-cli la productivité est doublé"},
+        {id: 2, text: "Mais certain n'aime pas la magie"}
     ];
+
+    deleteMessage(messageIdToDelete: number) {
+        this.messages = this.messages.filter((message) => message.id !== messageIdToDelete);
+    }
 
     constructor() { }
 }

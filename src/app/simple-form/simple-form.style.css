@@ -1,0 +1,13 @@
+:host{
+    display: flex;
+    flex-direction: column
+}
+
+input:focus{
+    font-weight: bold;
+    outline: none;
+}
+
+button{
+    border: none;
+}

@@ -5,12 +5,12 @@ import { Pipe, PipeTransform } from "@angular/core";
 })
 export class FilterPipe implements PipeTransform {
 
-    transform(items: string[], searchedValue: string): string[] {
+    transform(items: {text: string, id: number}[], searchedValue: string): {text: string, id: number}[] {
         if (!items || !searchedValue) {
             return items;
         }
 
-        return items.filter((item) => item.includes(searchedValue));
+        return items.filter((item) => item.text.includes(searchedValue));
     }
 
 }
