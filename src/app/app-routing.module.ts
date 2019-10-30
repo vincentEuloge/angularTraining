@@ -1,8 +1,10 @@
-import { RouterModule, Route } from "@angular/router";
+import { RouterModule, Route, PreloadAllModules } from "@angular/router";
 import { NgModule} from "@angular/core";
 import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { NotfoundComponent } from "./notfound.component";
+import { CustomRoutePreloader } from "./custom-route-preloader";
+import { AuthGuard } from "./auth.guard";
 
 const routes: Route[] = [
     {
@@ -21,13 +23,32 @@ const routes: Route[] = [
         component: AboutComponent
     },
     {
+        path: "contacts",
+        loadChildren: "./contacts/contacts.module#ContactsModule"
+    },
+    {
+        path: "people",
+        loadChildren: "./people/people.module#PeopleModule",
+        data: {
+            preload: true
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard]
+    },
+    {
         path: "**",
         component: NotfoundComponent
     }
   ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [
+        RouterModule.forRoot(
+            routes,
+            // {preloadingStrategy: PreloadAllModules} // remove this if you want app download lazy module on user nav click
+            {preloadingStrategy: CustomRoutePreloader} // remove this if you want app download lazy module on user nav click
+        )],
+    providers: [CustomRoutePreloader, AuthGuard],
     exports: [RouterModule]
 })
 export class AppRoutingModule {}

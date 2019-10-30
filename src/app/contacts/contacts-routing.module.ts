@@ -4,7 +4,7 @@ import { NgModule} from "@angular/core";
 
 const routes = [
     {
-        path: "contacts/list",
+        path: "",
         component: ContactListComponent
       }
 ];
